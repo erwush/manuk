@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FlappyBird : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class FlappyBird : MonoBehaviour
     public int score;
     public AudioSource[] audioSource;
     public TextMeshProUGUI scoreText;
+    public GameObject gameOver;
 
 
     void Start()
@@ -54,7 +56,15 @@ public class FlappyBird : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Game Over!");
+        gameOver.SetActive(true);
         Time.timeScale = 0f;
+    }
+
+    public void Reset()
+    {
+        Time.timeScale = 1f;
+        gameOver.SetActive(false);
+        score = 0;
+          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
