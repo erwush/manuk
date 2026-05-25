@@ -7,7 +7,6 @@ public class FlappyBird : MonoBehaviour
 {
     public float jumpForce = 5f;
     private Rigidbody2D rb;
-
     public float rotationSpeed = 5f;
     public float maxUpAngle = 30f;
     public float maxDownAngle = -90f;
