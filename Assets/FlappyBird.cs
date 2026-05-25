@@ -56,6 +56,7 @@ public class FlappyBird : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        audioSource[2].Play();
         gameOver.SetActive(true);
         Time.timeScale = 0f;
     }
