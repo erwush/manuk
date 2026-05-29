@@ -10,16 +10,23 @@ public class FlappyBird : MonoBehaviour
     public float rotationSpeed = 5f;
     public float maxUpAngle = 30f;
     public float maxDownAngle = -90f;
+    public int highScore;
     public int score;
     public AudioSource[] audioSource;
     public TextMeshProUGUI scoreText;
     public GameObject gameOver;
-
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI finalScore;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        // tampilkan ke UI
+        highScoreText.text = "High Score : " + highScore;
     }
+
 
     void Update()
     {
@@ -57,6 +64,13 @@ public class FlappyBird : MonoBehaviour
     {
         audioSource[2].Play();
         gameOver.SetActive(true);
+        finalScore.text = "Score: " + score.ToString();
+        if (score > PlayerPrefs.GetInt("HighScore"))
+        {
+            PlayerPrefs.SetInt("HighScore", score);
+            highScoreText.text = "High Score: " + score.ToString();
+        }
+
         Time.timeScale = 0f;
     }
 
@@ -65,6 +79,6 @@ public class FlappyBird : MonoBehaviour
         Time.timeScale = 1f;
         gameOver.SetActive(false);
         score = 0;
-          SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
